@@ -27,3 +27,9 @@ body.dark-theme {
 body {
   background: var(--bg-color);
 }
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+}

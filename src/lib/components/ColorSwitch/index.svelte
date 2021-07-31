@@ -15,10 +15,6 @@
 <style lang="scss">
   .color-switch {
     position: fixed;
-    background: none;
-    border: none;
-    outline: none;
-
     bottom: 1rem;
     right: 1rem;
   }
