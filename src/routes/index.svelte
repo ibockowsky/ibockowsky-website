@@ -18,7 +18,11 @@
 </div>
 
 <style lang="scss">
+  .home {
+    @include flex($direction: column, $align-items: center);
+  }
   .heading {
+    @include margin($bottom: 1rem);
     font-size: 6rem;
     @media only screen and (max-width: 790px) {
       font-size: 3rem;
@@ -27,10 +31,15 @@
   .icons {
     &--wrapper {
       @include flex($justify-content: space-between);
+      width: 50%;
 
       a, a:hover, a:visited, a:active {
         color: inherit;
       }
+
+      @media only screen and (max-width: 790px) {
+      width: 90%;
+    }
     }
   }
 </style>
