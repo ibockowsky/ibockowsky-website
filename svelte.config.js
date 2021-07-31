@@ -6,7 +6,10 @@ const config = {
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
 		adapter: netlifyAdapter(),
-		target: '#svelte'
+		target: '#svelte',
+		files: {
+			serviceWorker: './src/sw.js'
+		}
 	},
 	preprocess: sveltePreprocess({
 		scss: {
