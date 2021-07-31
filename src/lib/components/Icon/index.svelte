@@ -1,15 +1,15 @@
 <script>
   import IconSolid from './IconSolid.svelte'
   import IconBrands from './IconBrands.svelte'
-  import { state } from '$lib/store/layout'
+  import { layoutState } from '$lib/store/layout'
 
   export let iconSize
   export let iconType = 'brands'
   export let iconName = 'faGithub'
 
   if (!iconSize) {
-    const unsubscribeState = state.subscribe(value => {
-      iconSize = value.deviceWidth > 798 ? '3x' : '1.5x'
+    layoutState.subscribe(state => {
+      iconSize = state.deviceWidth > 798 ? '3x' : '2x'
     })
   }
 </script>

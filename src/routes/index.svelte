@@ -8,10 +8,10 @@
     <a href="https://github.com/ibockowsky" target="_blank" title="github">
       <Icon iconName={'faGithub'} />
     </a>
-    <a href="https://www.linkedin.com/in/iboc/" target="_blank" title="github">
+    <a href="https://www.linkedin.com/in/iboc/" target="_blank" title="linkedin">
       <Icon iconName={'faLinkedin'} />
     </a>
-    <a href="https://newfantastic.com/" target="_blank" title="github">
+    <a href="https://newfantastic.com/" target="_blank" title="newfantastic">
       <Icon iconName={'faLaptopHouse'} iconType={'solid'} />
     </a>
   </div>
@@ -24,6 +24,7 @@
   .heading {
     @include margin($bottom: 1rem);
     font-size: 6rem;
+    user-select: none;
     @media only screen and (max-width: 790px) {
       font-size: 3rem;
     }

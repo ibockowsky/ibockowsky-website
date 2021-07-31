@@ -1,10 +1,6 @@
 import { writable } from 'svelte/store'
 
-export const state = writable({
-	colorMode: 'todo',
-	deviceWidth: null
+export const layoutState = writable({
+	deviceWidth: null,
+	colorMode: null
 })
-
-export const loadLayoutState = (innerWidth) => {
-	state.set({ deviceWidth: innerWidth })
-}
