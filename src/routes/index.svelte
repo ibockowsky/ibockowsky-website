@@ -12,7 +12,7 @@
       <Icon iconName={'faLinkedin'} />
     </a>
     <a href="https://newfantastic.com/" target="_blank" title="github">
-      <Icon iconName={'faBacon'} iconType={'solid'} />
+      <Icon iconName={'faLaptopHouse'} iconType={'solid'} />
     </a>
   </div>
 </div>
@@ -38,7 +38,7 @@
       }
 
       @media only screen and (max-width: 790px) {
-      width: 90%;
+      width: 70%;
     }
     }
   }
