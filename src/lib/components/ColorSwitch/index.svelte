@@ -4,7 +4,7 @@
 
 </script>
 
-<button on:click class="color-switch">
+<button name="color-switch" on:click class="color-switch" aria-label="Color Switch">
   {#if iconName === 'faMoon'}
     <Icon iconName={'faMoon'} iconType={'solid'} iconSize={'1.5x'} />
   {:else}
