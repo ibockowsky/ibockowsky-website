@@ -5,8 +5,8 @@
   $: iconSize = $getDeviceWidth > 798 ? '3x' : '2x'
   const icons = [
     { iconName: 'faGithub', iconType: 'brands', href: 'https://github.com/ibockowsky', title: 'Github' },
-    { iconName: 'faLaptopHouse', iconType: 'solid', href: 'https://newfantastic.com/', title: 'Linkedin' },
-    { iconName: 'faLinkedin', iconType: 'brands', href: 'https://www.linkedin.com/in/iboc/', title: 'Newfantastic' }
+    { iconName: 'faLinkedin', iconType: 'brands', href: 'https://www.linkedin.com/in/iboc/', title: 'Linkedin' },
+    { iconName: 'faLaptopHouse', iconType: 'solid', href: 'https://newfantastic.com/', title: 'Newfantastic' }
   ]
 </script>
 
