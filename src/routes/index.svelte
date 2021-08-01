@@ -1,19 +1,23 @@
 <script>
-  import Icon from '$lib/components/Icon/index.svelte'
+  import { getDeviceWidth } from '$lib/store/layout'
+  import Icon from '$lib/components/Icon/Icon.svelte'
+
+  $: iconSize = $getDeviceWidth > 798 ? '3x' : '2x'
+  const icons = [
+    { iconName: 'faGithub', iconType: 'brands', href: 'https://github.com/ibockowsky', title: 'Github' },
+    { iconName: 'faLaptopHouse', iconType: 'solid', href: 'https://newfantastic.com/', title: 'Linkedin' },
+    { iconName: 'faLinkedin', iconType: 'brands', href: 'https://www.linkedin.com/in/iboc/', title: 'Newfantastic' }
+  ]
 </script>
 
 <div class="home">
   <h1 class="heading">ibockowsky</h1>
   <div class="icons--wrapper">
-    <a href="https://github.com/ibockowsky" target="_blank" title="github">
-      <Icon iconName={'faGithub'} />
+    {#each icons as { iconName, iconType, href, title }}
+    <a {href} {title} target="_blank">
+      <Icon {iconName} {iconType} {iconSize} />
     </a>
-    <a href="https://www.linkedin.com/in/iboc/" target="_blank" title="linkedin">
-      <Icon iconName={'faLinkedin'} />
-    </a>
-    <a href="https://newfantastic.com/" target="_blank" title="newfantastic">
-      <Icon iconName={'faLaptopHouse'} iconType={'solid'} />
-    </a>
+    {/each}
   </div>
 </div>
 

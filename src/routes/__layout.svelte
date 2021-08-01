@@ -1,56 +1,18 @@
 <script>
   import { onMount } from 'svelte'
-  import ColorSwitch from '$lib/components/ColorSwitch/index.svelte'
-  import { setColorMode, setDeviceWidth, getColorMode } from '$lib/store/layout'
+  import ColorSwitch from '$lib/components/ColorSwitch/ColorSwitch.svelte'
+  import { initLayout, setColorMode, getColorMode } from '$lib/store/layout'
 
-  const getPreferredColorScheme = () => {
-    if (window.matchMedia) {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
-      else return 'light'
-    }
-    return 'light'
-  }
-
-  const setupViewports = () => {
-    const vhFix = window.innerHeight * 0.01
-    const vw = window.innerWidth
-
-    document.documentElement.style.setProperty('--vh-fix', `${vhFix}px`)
-    setDeviceWidth(vw)
-  }
-
-  const setupColorMode = () => {
-    let colorMode = localStorage.getItem('color-mode')
-
-    if (!colorMode) {
-      colorMode = getPreferredColorScheme()
-      localStorage.setItem('color-mode', colorMode)
-    } 
+  const switchColorMode = () => {
+    const colorMode = $getColorMode === 'dark' ? 'light' : 'dark'
 
     setColorMode(colorMode)
   }
 
-  const switchColorMode = () => {
-    const newColorMode = $getColorMode === 'dark' ? 'light' : 'dark'
-    localStorage.setItem('color-mode', newColorMode)
-
-    if (newColorMode === 'light') {
-      document.body.classList.add('light-theme')
-      document.body.classList.remove('dark-theme')
-    } else {
-      document.body.classList.add('dark-theme')
-      document.body.classList.remove('light-theme')
-    }
-
-    setColorMode(newColorMode)
-  }
-
   onMount(() => {
-    setupViewports()
-    setupColorMode()
-
-    window.addEventListener('resize', setupViewports)
+    initLayout()
   })
+
 </script>
 
 <svelte:head>
@@ -74,6 +36,6 @@
 .layout {
   @include flex($align-items: center, $justify-content: center);
   @include size($x: 100vw, $y: 100vh);
-  height: calc(var(--vh-fix, 1vh) * 100);
+  height: calc(var(--vh-fixer, 1vh) * 100);
 }
 </style>
