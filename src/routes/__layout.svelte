@@ -1,15 +1,12 @@
 <script>
   import { onMount } from 'svelte'
-  import { layoutState } from '$lib/store/layout'
   import ColorSwitch from '$lib/components/ColorSwitch/index.svelte'
+  import { setColorMode, setDeviceWidth, getColorMode } from '$lib/store/layout'
 
   const getPreferredColorScheme = () => {
     if (window.matchMedia) {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark'
-      } else {
-        return 'light'
-      }
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
+      else return 'light'
     }
     return 'light'
   }
@@ -18,40 +15,39 @@
     const vhFix = window.innerHeight * 0.01
     const vw = window.innerWidth
 
-    $layoutState.deviceWidth = vw
     document.documentElement.style.setProperty('--vh-fix', `${vhFix}px`)
+    setDeviceWidth(vw)
   }
 
   const setupColorMode = () => {
-    if (!localStorage.getItem('color-mode')) {
-      const colorMode = getPreferredColorScheme()
-      $layoutState.colorMode = colorMode
+    let colorMode = localStorage.getItem('color-mode')
+
+    if (!colorMode) {
+      colorMode = getPreferredColorScheme()
       localStorage.setItem('color-mode', colorMode)
-    } else {
-      $layoutState.colorMode = localStorage.getItem('color-mode')
-    }
+    } 
+
+    setColorMode(colorMode)
   }
 
   const switchColorMode = () => {
-    const newColorMode = $layoutState.colorMode === 'dark' ? 'light' : 'dark'
-    $layoutState.colorMode = newColorMode
+    const newColorMode = $getColorMode === 'dark' ? 'light' : 'dark'
     localStorage.setItem('color-mode', newColorMode)
+
+    if (newColorMode === 'light') {
+      document.body.classList.add('light-theme')
+      document.body.classList.remove('dark-theme')
+    } else {
+      document.body.classList.add('dark-theme')
+      document.body.classList.remove('light-theme')
+    }
+
+    setColorMode(newColorMode)
   }
 
   onMount(() => {
     setupViewports()
     setupColorMode()
-
-    layoutState.subscribe(state => {
-      if (state.colorMode === 'light') {
-        document.body.classList.add('light-theme')
-        document.body.classList.remove('dark-theme')
-      }
-      else {
-        document.body.classList.add('dark-theme')
-        document.body.classList.remove('light-theme')
-      }
-    })
 
     window.addEventListener('resize', setupViewports)
   })
@@ -69,7 +65,7 @@
   <div class="container">
     <slot></slot>
   </div>
-  <ColorSwitch iconName={$layoutState.colorMode === 'dark' ? 'faSun' : 'faMoon'} on:click={switchColorMode} />
+  <ColorSwitch iconName={$getColorMode === 'dark' ? 'faSun' : 'faMoon'} on:click={switchColorMode} />
 </div>
 
 <style lang="scss" global>
