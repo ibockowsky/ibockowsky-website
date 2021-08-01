@@ -11,7 +11,6 @@ const setViewport = () => {
 
 const initColorMode = () => {
 	let colorMode = localStorage.getItem('color-mode')
-	console.log(colorMode)
 
 	if (!colorMode) {
 		colorMode = getPreferredColorScheme()
